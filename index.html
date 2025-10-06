@@ -95,12 +95,14 @@
       justify-content: center;
       margin-bottom: 1rem;
       overflow: hidden;
+      padding: 0; /* Padding'i sıfırladım */
     }
     
     .logo img {
-      width: 65%;
-      height: auto;
-      object-fit: contain;
+      width: 100%; /* Logoyu tam kare kaplayacak şekilde genişlettim */
+      height: 100%;
+      object-fit: cover; /* Logonun çerçeveye tam sığmasını sağladım */
+      border-radius: 18px; /* Çerçeveyle aynı köşe yuvarlaklığı */
       display: block;
     }
     
@@ -439,7 +441,7 @@
         <input type="hidden" name="_subject" value="Bak Bi Creative - Yeni Mesaj">
         <input type="hidden" name="_template" value="table">
         <input type="hidden" name="_captcha" value="false">
-        <input type="hidden" name="_next" value="https://camberktoken.github.io/Bak-Bi-Site/success.html">
+        <input type="hidden" name="_next" value="https://cambertkokcan.github.io/Bak-Bi-Site-4/">
         
         <div class="form-group">
           <label for="email">E-posta Adresiniz</label>
