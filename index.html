@@ -297,14 +297,6 @@
       border: 1px solid rgba(52, 199, 89, 0.2);
     }
     
-    .hidden-form {
-      position: absolute;
-      opacity: 0;
-      pointer-events: none;
-      width: 1px;
-      height: 1px;
-    }
-    
     #preloader {
       position: fixed;
       top: 0;
@@ -441,28 +433,27 @@
 
     <div class="contact-form">
       <h3>📬 Bize Ulaşın</h3>
-      <form id="contactForm">
+      <!-- FORMSUBMIT - ÜYE OLMADAN ÇALIŞIR -->
+      <form action="https://formsubmit.co/bakbicreative@gmail.com" method="POST" id="contactForm">
+        <!-- Gizli input'lar -->
+        <input type="hidden" name="_subject" value="Bak Bi Creative - Yeni Mesaj">
+        <input type="hidden" name="_template" value="table">
+        <input type="hidden" name="_captcha" value="false">
+        <input type="hidden" name="_next" value="https://camberktoken.github.io/Bak-Bi-Site/success.html">
+        
         <div class="form-group">
           <label for="email">E-posta Adresiniz</label>
-          <input type="email" id="email" class="form-control" placeholder="ornek@email.com" required>
+          <input type="email" id="email" name="email" class="form-control" placeholder="ornek@email.com" required>
         </div>
         <div class="form-group">
           <label for="message">Mesajınız</label>
-          <textarea id="message" class="form-control" placeholder="Merhaba! Size nasıl yardımcı olabilirim?" required></textarea>
+          <textarea id="message" name="message" class="form-control" placeholder="Merhaba! Size nasıl yardımcı olabilirim?" required></textarea>
         </div>
         <button type="submit" class="submit-btn">Mesajı Gönder</button>
         <div class="form-message" id="formMessage"></div>
       </form>
     </div>
   </main>
-
-  <!-- Gizli Google Forms -->
-  <iframe name="hiddenIframe" class="hidden-form"></iframe>
-  <form id="hiddenGoogleForm" action="https://docs.google.com/forms/d/e/1FAIpQLSehV-zGnvhSDJgGEQ15SIL7z_rpdeF8QcYRM2_uvgL3q7k_3g/formResponse" method="POST" target="hiddenIframe">
-    <!-- GÜNCELLENMİŞ ID'LER -->
-    <input type="hidden" name="entry.1161119643" id="hiddenEmail">
-    <input type="hidden" name="entry.1469455118" id="hiddenMessage">
-  </form>
 
   <script>
     const pre = document.getElementById('preloader');
@@ -487,33 +478,21 @@
       }
     }
 
-    // Google Forms entegrasyonu
+    // FormSubmit için basit JavaScript
     document.getElementById('contactForm').addEventListener('submit', function(e) {
-      e.preventDefault();
-      
-      const email = document.getElementById('email').value;
-      const message = document.getElementById('message').value;
       const formMessage = document.getElementById('formMessage');
       
-      // Gizli Google Forms'a verileri aktar
-      document.getElementById('hiddenEmail').value = email;
-      document.getElementById('hiddenMessage').value = message;
-      
-      // Google Forms'u gönder
-      document.getElementById('hiddenGoogleForm').submit();
-      
-      // Başarı mesajını göster
-      formMessage.textContent = 'Mesajınız başarıyla gönderildi! En kısa sürede size dönüş yapacağız.';
-      formMessage.className = 'form-message success';
-      formMessage.style.display = 'block';
-      
-      // Formu temizle
-      document.getElementById('contactForm').reset();
-      
-      // Mesajı 5 saniye sonra gizle
+      // Hemen başarı mesajını göster (FormSubmit zaten işleyecek)
       setTimeout(() => {
-        formMessage.style.display = 'none';
-      }, 5000);
+        formMessage.textContent = 'Mesajınız başarıyla gönderildi! En kısa sürede size dönüş yapacağız.';
+        formMessage.className = 'form-message success';
+        formMessage.style.display = 'block';
+        
+        // Mesajı 5 saniye sonra gizle
+        setTimeout(() => {
+          formMessage.style.display = 'none';
+        }, 5000);
+      }, 1000);
     });
   </script>
 </body>
